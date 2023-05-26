@@ -280,5 +280,14 @@ func evaluateCronExpression(cronExpr string) (bool, error) {
 	}
 	now := time.Now()
 	nextTime := p.Next(now)
-	return now.Equal(nextTime), nil
+	log.Printf("======evaluateCronExpression======")
+	log.Printf("now=%v", now)
+	log.Printf("nextTime=%v", nextTime)
+	log.Printf("duration = %v", now.Sub(nextTime).Seconds())
+	
+	duration := now.Sub(nextTime).Seconds()
+	maxSeconds := float64(-1 * 60)
+	result := duration <= 0 && duration > maxSeconds
+	log.Printf("result = %v)", result)
+	return result, nil
 }
